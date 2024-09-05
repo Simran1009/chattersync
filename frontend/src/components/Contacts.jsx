@@ -7,7 +7,7 @@ export default function Contacts({ contacts, changeChat }) {
   const [currentUserName, setCurrentUserName] = useState("");
   const [currentUserImage, setCurrentUserImage] = useState("");
   const [currentSelected, setCurrentSelected] = useState(undefined);
-  const [isVisible, setIsVisible] = useState(true); // State for visibility
+  const [isContactsVisible, setIsContactsVisible] = useState(true); // State for contacts visibility
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -32,47 +32,44 @@ export default function Contacts({ contacts, changeChat }) {
     <Container>
       <div className="brand">
         <img src={Logo} alt="logo" />
-        <h3>fusion</h3>
-        <ToggleButton onClick={() => setIsVisible(!isVisible)}>
-          {isVisible ? <FaTimes /> : <FaAngleDown />}
+        <ToggleButton onClick={() => setIsContactsVisible(!isContactsVisible)}>
+          {isContactsVisible ? <FaTimes /> : <FaAngleDown />}
         </ToggleButton>
       </div>
-      {isVisible && (
-        <>
-          <div className="contacts">
-            {contacts.map((contact, index) => (
-              <div
-                key={contact._id}
-                className={`contact ${
-                  index === currentSelected ? "selected" : ""
-                }`}
-                onClick={() => changeCurrentChat(index, contact)}
-              >
-                <div className="avatar">
-                  <img
-                    src={`data:image/svg+xml;base64,${contact.avatarImage}`}
-                    alt="avatar"
-                  />
-                </div>
-                <div className="username">
-                  <h3>{contact.username}</h3>
-                </div>
+      {isContactsVisible && (
+        <div className="contacts">
+          {contacts.map((contact, index) => (
+            <div
+              key={contact._id}
+              className={`contact ${
+                index === currentSelected ? "selected" : ""
+              }`}
+              onClick={() => changeCurrentChat(index, contact)}
+            >
+              <div className="avatar">
+                <img
+                  src={`data:image/svg+xml;base64,${contact.avatarImage}`}
+                  alt="avatar"
+                />
               </div>
-            ))}
-          </div>
-          <div className="current-user">
-            <div className="avatar">
-              <img
-                src={`data:image/svg+xml;base64,${currentUserImage}`}
-                alt="avatar"
-              />
+              <div className="username">
+                <h3>{contact.username}</h3>
+              </div>
             </div>
-            <div className="username">
-              <h2>{currentUserName}</h2>
-            </div>
-          </div>
-        </>
+          ))}
+        </div>
       )}
+      <div className="current-user">
+        <div className="avatar">
+          <img
+            src={`data:image/svg+xml;base64,${currentUserImage}`}
+            alt="avatar"
+          />
+        </div>
+        <div className="username">
+          <h2>{currentUserName}</h2>
+        </div>
+      </div>
     </Container>
   );
 }
@@ -83,7 +80,7 @@ const Container = styled.div`
   min-height: 100vh;
   overflow: hidden;
   background-color: #0a0f27;
-  border-right: 1px solid #333;
+  border-left: 1px solid #333;
 
   .brand {
     display: flex;
@@ -94,9 +91,8 @@ const Container = styled.div`
     background-color: #0d0d30;
     position: relative;
     
-    
     img {
-      height: 4rem;
+      height: 6rem;
     }
     h3 {
       color: #ffffff;
@@ -125,7 +121,7 @@ const Container = styled.div`
       min-height: 5rem;
       cursor: pointer;
       width: 90%;
-      border-radius: 0.2rem;
+      border-radius: 1rem;
       padding: 0.5rem;
       display: flex;
       gap: 1rem;

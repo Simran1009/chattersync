@@ -64,12 +64,12 @@ export default function Chat() {
     <>
       <Container>
         <div className="container">
-          <Contacts contacts={contacts} changeChat={handleChatChange} />
           {currentChat === undefined ? (
             <Welcome />
           ) : (
             <ChatContainer currentChat={currentChat} socket={socket} />
           )}
+          <Contacts contacts={contacts} changeChat={handleChatChange} />
         </div>
       </Container>
     </>
@@ -90,7 +90,7 @@ const Container = styled.div`
     width: 100vw;
     background-color: rgba(42, 42, 64, 0.8);
     display: grid;
-    grid-template-columns: 25% 75%;
+    grid-template-columns: 75% 25%;
     border-radius: 12px;
     box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.2);
 
